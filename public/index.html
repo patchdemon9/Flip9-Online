@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#07111f" />
+  <meta name="description" content="Flip 9 online multiplayer card game" />
+  <title>Flip 9 Online</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <main class="app">
+    <header class="brand">
+      <div class="brand-mark">9</div>
+      <div>
+        <h1>FLIP 9</h1>
+        <p>Push your luck. Bank your score. Betray probability.</p>
+      </div>
+    </header>
+
+    <section id="homeView" class="panel home-panel">
+      <div class="hero-copy">
+        <span class="pill">ONLINE MULTIPLAYER</span>
+        <h2>Play together from anywhere.</h2>
+        <p>
+          Create a room, share the code and play live on separate phones,
+          tablets or computers.
+        </p>
+      </div>
+
+      <div class="home-form">
+        <label>
+          Your name
+          <input id="nameInput" maxlength="20" placeholder="Enter your name" autocomplete="nickname" />
+        </label>
+
+        <button id="createBtn" class="btn primary large">Create a Room</button>
+
+        <div class="divider"><span>or join one</span></div>
+
+        <div class="join-grid">
+          <input id="roomCodeInput" maxlength="5" placeholder="ROOM CODE" autocomplete="off" />
+          <button id="joinBtn" class="btn secondary">Join Room</button>
+        </div>
+
+        <div id="homeError" class="error"></div>
+      </div>
+    </section>
+
+    <section id="roomView" class="hidden">
+      <section class="panel room-header">
+        <div>
+          <div class="eyebrow">ROOM CODE</div>
+          <button id="copyCodeBtn" class="room-code"></button>
+          <div id="phaseText" class="muted"></div>
+        </div>
+
+        <div class="header-actions">
+          <button id="soundBtn" class="icon-btn" title="Toggle sound">🔊</button>
+          <button id="shareBtn" class="btn secondary">Copy Invite Link</button>
+          <button id="leaveBtn" class="btn ghost">Leave</button>
+        </div>
+      </section>
+
+      <section class="panel game-panel">
+        <div class="topline">
+          <div>
+            <h2 id="mainStatus">Waiting for players</h2>
+            <div id="gameMessage" class="muted"></div>
+          </div>
+          <div id="roundBadge" class="round-badge"></div>
+        </div>
+
+        <div id="playersGrid" class="players-grid"></div>
+
+        <div id="lobbyControls" class="controls lobby-controls">
+          <button id="startGameBtn" class="btn primary large">Start Game</button>
+          <div id="lobbyHint" class="muted"></div>
+        </div>
+
+        <div id="gameArea" class="hidden">
+          <div class="turn-stage">
+            <div id="turnPulse" class="turn-pulse">
+              <div class="turn-pulse-inner">
+                <div class="turn-small">CURRENT TURN</div>
+                <div id="turnPlayerName" class="turn-player-name"></div>
+              </div>
+            </div>
+            <div id="turnBanner" class="turn-banner"></div>
+          </div>
+
+          <div id="handArea" class="hand-area"></div>
+
+          <section class="activity-panel">
+            <div class="activity-heading">Recent moves</div>
+            <div id="activityFeed" class="activity-feed"></div>
+          </section>
+
+          <div class="controls">
+            <button id="flipBtn" class="btn primary large">Flip a Card</button>
+            <button id="bankBtn" class="btn success large">Bank Score</button>
+            <button id="nextRoundBtn" class="btn primary large hidden">Start Next Round</button>
+          </div>
+
+          <div id="actionError" class="error"></div>
+        </div>
+      </section>
+
+      <section class="panel rules">
+        <strong>Rules:</strong> On your turn, choose exactly one action: flip one card
+        or bank your score. After that, play moves to the next active player. A duplicate
+        busts your round. Once you bank or bust, you sit out until the next round.
+        Collect all nine unique numbers for a 25-point bonus. First to 200 wins.
+      </section>
+    </section>
+  </main>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
